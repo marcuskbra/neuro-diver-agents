@@ -1,6 +1,25 @@
-# NeuroDiverAgents - Neurodivergent Parenting Support Agents
+<p align="center">
+  <img src="assets/banner.svg" alt="NeuroDiverAgents Banner" width="100%">
+</p>
 
-**Kaggle Agents Intensive - Capstone Project**
+<p align="center">
+  <strong>Kaggle Agents Intensive - Capstone Project | Track: Agents for Good</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/marcuskbra/neuro-diver-agents">
+    <img src="https://img.shields.io/badge/GitHub-Repository-blue?logo=github" alt="GitHub">
+  </a>
+  <a href="https://www.kaggle.com/">
+    <img src="https://img.shields.io/badge/Kaggle-Notebook-20BEFF?logo=kaggle" alt="Kaggle">
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.12+-green?logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/Google-ADK-4285F4?logo=google" alt="Google ADK">
+</p>
+
+---
+
+# NeuroDiverAgents
 
 AI-powered multi-agent system to support parents of neurodivergent children (ADHD + ASD Level 1) with behavioral
 understanding, evidence-based strategies, and activity planning.
@@ -20,18 +39,54 @@ This capstone project demonstrates **6+ capabilities** from the 5-Day AI Agents 
 | 2   | Custom tools                    | Behavior classifier, activity database, pattern analyzer |
 | 4   | Session management              | Conversation context, state tracking                     |
 
----
+## 🏗️ System Architecture
 
-## 🏗️ Architecture
+### Multi-Agent Hierarchical Design
+
+This project implements a **hierarchical multi-agent system** using Google ADK with type-safe Pydantic models
+throughout.
+
+**Run the cell below to see the interactive architecture diagram!**
+
+### Agent Hierarchy Overview
 
 ```
-Parenting Coordinator (Manager)
-├── ADHD Expert (GoogleSearch + Behavior Analysis)
-├── ASD Expert (GoogleSearch + Behavior Analysis)
-├── Developmental Expert (Age milestones)
-├── Memory Agent (Pattern learning)
-└── Activity Planner (Structured activities)
+                    ┌─────────────────────────────────────────────────────────┐
+                    │            🎯 PARENTING COORDINATOR                     │
+                    │                   (Manager Agent)                       │
+                    │  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ │
+                    │  • Orchestrates all specialist agents                   │
+                    │  • Routes questions to appropriate experts              │
+                    │  • Synthesizes multi-perspective responses              │
+                    │  • Tools: All 5 specialists as AgentTools               │
+                    └───────────────────────────┬─────────────────────────────┘
+                                                │
+            ┌───────────────┬───────────────────┼───────────────────┬──────────────────┐
+            │               │                   │                   │                  │
+            ▼               ▼                   ▼                   ▼                  ▼
+   ┌─────────────┐  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐   ┌─────────────────┐
+   │   🧠 ADHD   │  │  🌈 ASD     │   │  📊 DEV     │   │  💾 MEMORY  │   │  📅 ACTIVITY    │
+   │   Expert    │  │  Expert     │   │  Expert     │   │  Agent      │   │  Planner        │
+   │─────────────│  │─────────────│   │─────────────│   │─────────────│   │─────────────────│
+   │ Executive   │  │ Sensory     │   │ Age-typical │   │ Pattern     │   │ Structured      │
+   │ function    │  │ processing  │   │ milestones  │   │ learning    │   │ activity plans  │
+   │─────────────│  │─────────────│   │─────────────│   │─────────────│   │─────────────────│
+   │ 🔧 Tools:   │  │ 🔧 Tools:   │   │ 🔧 Tools:   │   │ 🔧 Tools:   │   │ 🔧 Tools:       │
+   │ • Search    │  │ • Search    │   │ • Search    │   │ • Pattern   │   │ • Activity      │
+   │ • Behavior  │  │ • Behavior  │   │             │   │   Analyzer  │   │   Planner       │
+   │   Classifier│  │   Classifier│   │             │   │             │   │                 │
+   └─────────────┘  └─────────────┘   └─────────────┘   └─────────────┘   └─────────────────┘
 ```
+
+### Specialist Agents
+
+| Agent                   | Focus Area         | Tools                            | Key Capabilities                                  |
+|-------------------------|--------------------|----------------------------------|---------------------------------------------------|
+| 🧠 **ADHD Expert**      | Executive function | GoogleSearch, BehaviorClassifier | Working memory, task initiation, impulse control  |
+| 🌈 **ASD Expert**       | Sensory processing | GoogleSearch, BehaviorClassifier | Routines, social interaction, flexibility         |
+| 📊 **Dev Expert**       | Milestones         | GoogleSearch                     | Age-appropriate expectations, typical development |
+| 💾 **Memory Agent**     | Personalization    | PatternAnalyzer                  | Session history, successful strategies            |
+| 📅 **Activity Planner** | Structured plans   | ActivityPlanner                  | Materials, timing, success criteria               |
 
 **Type-Safe Design**: All models use Pydantic v2 with strict type checking, discriminated unions for results, and
 comprehensive validation.

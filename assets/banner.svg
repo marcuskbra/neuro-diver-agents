@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300">
+  <defs>
+    <!-- Gradient background -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7C3AED;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
+    </linearGradient>
+    <!-- Neurodiversity infinity symbol gradient -->
+    <linearGradient id="infinityGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B6B" />
+      <stop offset="16%" style="stop-color:#FFA500" />
+      <stop offset="33%" style="stop-color:#FFD93D" />
+      <stop offset="50%" style="stop-color:#6BCB77" />
+      <stop offset="66%" style="stop-color:#4D96FF" />
+      <stop offset="83%" style="stop-color:#9B59B6" />
+      <stop offset="100%" style="stop-color:#FF6B6B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="300" fill="url(#bgGradient)"/>
+
+  <!-- Decorative circles (representing agents) -->
+  <circle cx="100" cy="150" r="60" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="200" cy="80" r="40" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="1100" cy="150" r="70" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="1000" cy="220" r="45" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="150" cy="250" r="35" fill="rgba(255,255,255,0.06)"/>
+
+  <!-- Connection lines (representing agent network) -->
+  <g stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none">
+    <path d="M100,150 Q200,100 300,150"/>
+    <path d="M900,150 Q1000,100 1100,150"/>
+  </g>
+
+  <!-- Robot/Agent icon - centered in left circle -->
+  <g transform="translate(100, 150)">
+    <!-- Robot body -->
+    <rect x="-22" y="-10" width="44" height="45" rx="10" fill="rgba(255,255,255,0.95)"/>
+    <!-- Robot head -->
+    <rect x="-18" y="-38" width="36" height="30" rx="8" fill="rgba(255,255,255,0.95)"/>
+    <!-- Antenna -->
+    <line x1="0" y1="-38" x2="0" y2="-48" stroke="rgba(255,255,255,0.95)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="0" cy="-52" r="5" fill="#FFD93D"/>
+    <!-- Eyes -->
+    <circle cx="-8" cy="-25" r="6" fill="#4F46E5"/>
+    <circle cx="8" cy="-25" r="6" fill="#4F46E5"/>
+    <!-- Eye shine -->
+    <circle cx="-6" cy="-27" r="2" fill="rgba(255,255,255,0.8)"/>
+    <circle cx="10" cy="-27" r="2" fill="rgba(255,255,255,0.8)"/>
+    <!-- Smile -->
+    <path d="M-8,-12 Q0,-6 8,-12" fill="none" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+    <!-- Arms -->
+    <rect x="-32" y="0" width="12" height="20" rx="5" fill="rgba(255,255,255,0.95)"/>
+    <rect x="20" y="0" width="12" height="20" rx="5" fill="rgba(255,255,255,0.95)"/>
+    <!-- Chest detail (heart) -->
+    <path d="M0,8 C-3,5 -8,6 -8,11 C-8,16 0,22 0,22 C0,22 8,16 8,11 C8,6 3,5 0,8" fill="#EC4899"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="600" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="bold" fill="white" text-anchor="middle">
+    NeuroDiverAgents
+  </text>
+
+  <!-- Neurodiversity infinity symbol -->
+  <g transform="translate(600, 165)">
+    <path d="M-40,0 C-40,-25 -15,-25 0,0 C15,25 40,25 40,0 C40,-25 15,-25 0,0 C-15,25 -40,25 -40,0"
+          fill="none" stroke="url(#infinityGradient)" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- Subtitle -->
+  <text x="600" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="rgba(255,255,255,0.9)" text-anchor="middle">
+    AI-Powered Support for Parents of Children with ADHD &amp; Autism
+  </text>
+
+  <!-- Tags -->
+  <g transform="translate(600, 260)">
+    <rect x="-280" y="-15" width="120" height="28" rx="14" fill="rgba(255,255,255,0.2)"/>
+    <text x="-220" y="5" font-family="system-ui, sans-serif" font-size="14" fill="white" text-anchor="middle">Multi-Agent AI</text>
+
+    <rect x="-140" y="-15" width="130" height="28" rx="14" fill="rgba(255,255,255,0.2)"/>
+    <text x="-75" y="5" font-family="system-ui, sans-serif" font-size="14" fill="white" text-anchor="middle">Google ADK</text>
+
+    <rect x="10" y="-15" width="140" height="28" rx="14" fill="rgba(255,255,255,0.2)"/>
+    <text x="80" y="5" font-family="system-ui, sans-serif" font-size="14" fill="white" text-anchor="middle">Agents for Good</text>
+
+    <rect x="170" y="-15" width="110" height="28" rx="14" fill="rgba(255,255,255,0.2)"/>
+    <text x="225" y="5" font-family="system-ui, sans-serif" font-size="14" fill="white" text-anchor="middle">Type-Safe</text>
+  </g>
+
+  <!-- Heart icon (caring aspect) -->
+  <g transform="translate(1120, 160)">
+    <path d="M0,-15 C-10,-25 -25,-20 -25,-5 C-25,10 0,25 0,25 C0,25 25,10 25,-5 C25,-20 10,-25 0,-15"
+          fill="rgba(255,255,255,0.3)"/>
+  </g>
+</svg>
