@@ -4,85 +4,59 @@ This directory contains Jupyter notebooks for demonstrating the Neurodivergent P
 
 ## 📓 Available Notebooks
 
+### `kaggle_capstone_self_contained.ipynb` (Recommended for Submission)
+
+**Purpose**: Fully self-contained notebook for Kaggle Agents Intensive Capstone submission.
+
+**Key Feature**: All source code is embedded using `%%writefile` cells - **no external file uploads required!**
+
 ### `kaggle_capstone_demo.ipynb`
 
-**Purpose**: Complete demonstration of the multi-agent system for Kaggle Agents Intensive Capstone submission.
-
-**Contents**:
-
-1. Project overview and architecture explanation
-2. Setup and installation instructions
-3. API key configuration for Kaggle
-4. Three interactive demo scenarios:
-    - Scenario 1: Homework refusal behavioral analysis
-    - Scenario 2: Bedtime routine activity planning
-    - Scenario 3: Pattern learning from session history
-5. Comprehensive capability showcase (6+ ADK features)
-6. Results analysis and conclusions
-
-**Requirements**:
-
-- Google AI API key (get at: https://aistudio.google.com/app/apikey)
-- Project source code uploaded to Kaggle notebook
+**Purpose**: Development version of the notebook (requires separate source file upload).
 
 ---
 
-## 🚀 Running on Kaggle
+## 🚀 Quick Start for Kaggle Submission
 
-### Step 1: Create New Notebook
+### Option A: Self-Contained Notebook (Recommended)
 
-1. Go to [Kaggle Notebooks](https://www.kaggle.com/code)
-2. Click "New Notebook"
-3. Choose "Python" notebook type
+1. Run `./prepare_for_kaggle.sh` to generate the self-contained notebook
+2. Go to [Kaggle Notebooks](https://www.kaggle.com/code)
+3. Click "New Notebook"
+4. File → Upload Notebook → Select `kaggle_capstone_self_contained.ipynb`
+5. Add `GOOGLE_API_KEY` as a Kaggle secret (Add-ons → Secrets)
+6. Enable internet access (Settings → Internet → On)
+7. Click "Run All"
 
-### Step 2: Upload Project Files
+**That's it!** The notebook creates all source files automatically.
 
-You need to upload the `src/` directory to your Kaggle notebook:
+### Option B: Manual Setup (Alternative)
 
-**Option A: Direct Upload**
+If you prefer to upload source files separately:
 
-1. Create a new notebook
-2. Click "Add Data" → "Upload" → "New Dataset"
-3. Upload the entire `src/` directory as a zip file
-4. Extract in the notebook: `!unzip /kaggle/input/your-dataset/src.zip -d /kaggle/working/`
+1. Create a new Kaggle notebook
+2. Upload `src/` directory as a dataset
+3. Extract in notebook: `!unzip /kaggle/input/your-dataset/src.zip -d /kaggle/working/`
+4. Upload `kaggle_capstone_demo.ipynb`
+5. Configure API key and run
 
-**Option B: GitHub Integration**
+---
 
-1. Push your project to GitHub
-2. In Kaggle notebook: "Add Data" → "GitHub"
-3. Connect your repository
-4. Copy files to working directory
+## 📦 Generating the Self-Contained Notebook
 
-**Required directory structure**:
-
-```
-/kaggle/working/
-└── src/
-    └── capstone/
-        ├── models/
-        │   ├── __init__.py
-        │   ├── behavior.py
-        │   ├── activity.py
-        │   ├── strategy.py
-        │   ├── memory.py
-        │   └── results.py
-        ├── tools/
-        │   ├── __init__.py
-        │   ├── behavior_classifier.py
-        │   ├── activity_planner.py
-        │   └── pattern_analyzer.py
-        └── agents/
-            ├── __init__.py
-            ├── retry_config.py
-            ├── adhd_expert.py
-            ├── asd_expert.py
-            ├── developmental_expert.py
-            ├── memory_agent.py
-            ├── activity_planner_agent.py
-            └── coordinator.py
+```bash
+cd notebooks/
+./prepare_for_kaggle.sh
 ```
 
-### Step 3: Configure API Key
+This runs `make_self_contained.py` which:
+- Reads all Python files from `src/capstone/`
+- Injects them as `%%writefile` cells into the notebook
+- Creates `kaggle_capstone_self_contained.ipynb`
+
+---
+
+## ⚙️ Configure API Key
 
 **Recommended: Use Kaggle Secrets**
 

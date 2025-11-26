@@ -1,49 +1,40 @@
 #!/bin/bash
-# prepare_for_kaggle.sh - Package project for Kaggle upload
+# prepare_for_kaggle.sh - Prepare self-contained notebook for Kaggle submission
 
 set -e  # Exit on error
 
-echo "📦 Preparing project for Kaggle submission..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
-# Create output directory
-OUTPUT_DIR="kaggle_upload"
-mkdir -p "$OUTPUT_DIR"
+echo "📦 Preparing self-contained notebook for Kaggle submission..."
 
-echo "📁 Copying source files..."
-
-# Copy src directory
-cp -r ../src "$OUTPUT_DIR/"
-
-# Copy notebook
-cp kaggle_capstone_demo.ipynb "$OUTPUT_DIR/"
-
-# Copy essential documentation
-cp ../README.md "$OUTPUT_DIR/"
-cp ../RETRY_STRATEGY.md "$OUTPUT_DIR/"
-
-# Create requirements.txt for Kaggle
-cat > "$OUTPUT_DIR/requirements.txt" << EOF
-google-genai>=0.2.0
-google-adk>=0.1.0
-pydantic>=2.5.0
-pydantic-settings>=2.1.0
-EOF
-
-# Create archive
-echo "🗜️ Creating archive..."
-cd "$OUTPUT_DIR"
-zip -r ../kaggle_upload.zip . -x "*.pyc" -x "__pycache__/*" -x ".DS_Store"
-cd ..
-
-echo "✅ Package created: kaggle_upload.zip"
+# Step 1: Generate self-contained notebook
 echo ""
-echo "📋 Next steps:"
+echo "🔧 Step 1: Generating self-contained notebook..."
+python make_self_contained.py
+
+# Step 2: Verify the notebook was created
+if [ ! -f "kaggle_capstone_self_contained.ipynb" ]; then
+    echo "❌ Error: Failed to generate self-contained notebook"
+    exit 1
+fi
+
+echo ""
+echo "✅ Self-contained notebook created: kaggle_capstone_self_contained.ipynb"
+echo ""
+echo "📋 Submission Instructions:"
+echo ""
 echo "1. Go to Kaggle Notebooks: https://www.kaggle.com/code"
 echo "2. Click 'New Notebook'"
-echo "3. Upload kaggle_upload.zip as a dataset"
-echo "4. Extract in notebook: !unzip /kaggle/input/your-dataset/kaggle_upload.zip -d /kaggle/working/"
-echo "5. Add GOOGLE_API_KEY as a Kaggle secret"
-echo "6. Enable internet access in notebook settings"
-echo "7. Open kaggle_capstone_demo.ipynb and run all cells"
+echo "3. File → Upload Notebook → Select 'kaggle_capstone_self_contained.ipynb'"
+echo "4. Add GOOGLE_API_KEY as a Kaggle secret (Add-ons → Secrets)"
+echo "5. Enable internet access (Settings → Internet → On)"
+echo "6. Click 'Run All' to execute the complete demonstration"
 echo ""
-echo "📚 See notebooks/README.md for detailed instructions"
+echo "💡 The notebook is fully self-contained - no additional file uploads needed!"
+echo ""
+echo "📁 Files for submission:"
+echo "   - notebooks/kaggle_capstone_self_contained.ipynb (main submission)"
+echo "   - KAGGLE_SUBMISSION_WRITEUP.md (competition writeup)"
+echo ""
+echo "🔗 GitHub Repository: https://github.com/marcuskbra/neuro-diver-agents"
