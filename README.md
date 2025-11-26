@@ -101,15 +101,28 @@ neurodiveragents/
 │       │   ├── behavior_classifier.py   # Type-safe behavior analysis
 │       │   ├── activity_planner.py      # Type-safe activity planning
 │       │   └── pattern_analyzer.py      # Type-safe pattern recognition
-│       └── agents/
-│           ├── adhd_expert.py           # ADHD specialist agent
-│           ├── asd_expert.py            # ASD specialist agent
-│           ├── developmental_expert.py  # Developmental specialist
-│           ├── memory_agent.py          # Pattern learning agent
-│           ├── activity_planner_agent.py # Activity planning agent
-│           └── coordinator.py           # Manager/coordinator agent
+│       ├── agents/
+│       │   ├── coordinator.py           # Manager/coordinator agent
+│       │   ├── specialist_factory.py    # Factory for specialist agents
+│       │   ├── agent_configs.py         # Agent configurations and prompts
+│       │   ├── tool_wrappers.py         # ADK tool wrapper functions
+│       │   ├── tool_formatters.py       # Output formatting utilities
+│       │   ├── specialist_helpers.py    # Specialist consultation helpers
+│       │   └── retry_config.py          # API retry configuration
+│       └── infrastructure/
+│           └── agent_factory.py         # AgentFactory with caching
+├── tests/
+│   ├── unit/                    # Unit tests (180 tests, 88% coverage)
+│   └── conftest.py              # Test fixtures
+├── docs/
+│   ├── api_reference.md         # Complete API documentation
+│   ├── architecture_guide.md    # System architecture guide
+│   ├── typing_guide.md          # Type safety patterns
+│   ├── testing_guide.md         # Testing best practices
+│   └── best_practices.md        # Python best practices
 ├── demo_tools.py                # Demonstration of type-safe tools
 ├── demo_agents.py               # Multi-agent system demo
+├── demo_comprehensive.py        # Full capability demonstration
 ├── pyproject.toml               # Dependencies and configuration
 └── README.md                    # This file
 ```

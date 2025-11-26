@@ -195,7 +195,7 @@ treatment plans, and serious behavioral concerns.
 ## Links
 
 - **Kaggle Notebook**: [Link to notebook]
-- **GitHub Repository**: [Link to repo]
+- **GitHub Repository**: [https://github.com/marcuskbra/neuro-diver-agents](https://github.com/marcuskbra/neuro-diver-agents)
 - **Demo Video**: [Optional - for bonus points]
 
 ---
