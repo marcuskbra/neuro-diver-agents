@@ -1,0 +1,26 @@
+"""ADK specialist agents for neurodivergent parenting support."""
+
+from .coordinator import create_coordinator
+from .specialist_factory import (
+    create_activity_planner_agent,
+    create_adhd_expert,
+    create_agent_by_type,
+    create_asd_expert,
+    create_developmental_expert,
+    create_memory_agent,
+    create_specialist_agent,
+)
+
+__all__ = [
+    # Main coordinator
+    "create_coordinator",
+    # Specialist agents (backward compatible)
+    "create_adhd_expert",
+    "create_asd_expert",
+    "create_developmental_expert",
+    "create_memory_agent",
+    "create_activity_planner_agent",
+    # New factory functions
+    "create_specialist_agent",
+    "create_agent_by_type",
+]
