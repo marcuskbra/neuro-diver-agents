@@ -123,14 +123,19 @@ class TestCreateDevelopmentalExpert:
 
     @patch("capstone.agents.specialist_factory.get_retry_config")
     @patch("capstone.agents.specialist_factory.LlmAgent")
-    def test_tools_set_to_empty_list(self, mock_llm_agent: Mock, mock_retry_config: Mock) -> None:
-        """Test tools parameter is empty list (orchestration-only)."""
+    def test_tools_includes_google_search(
+        self, mock_llm_agent: Mock, mock_retry_config: Mock
+    ) -> None:
+        """Test tools parameter includes google_search for web research."""
         mock_retry_config.return_value = Mock(spec=GenerateContentConfig)
 
         create_developmental_expert()
 
         call_kwargs = mock_llm_agent.call_args[1]
-        assert call_kwargs["tools"] == []
+        tools = call_kwargs["tools"]
+        assert len(tools) == 1
+        # google_search is the ADK's pre-instantiated GoogleSearchTool
+        assert tools[0].__class__.__name__ == "GoogleSearchTool"
 
     @patch("capstone.agents.specialist_factory.get_retry_config")
     @patch("capstone.agents.specialist_factory.LlmAgent")

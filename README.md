@@ -28,7 +28,7 @@ understanding, evidence-based strategies, and activity planning.
 
 ## 🎯 Project Overview
 
-This capstone project demonstrates **6+ capabilities** from the 5-Day AI Agents Intensive Course:
+This capstone project demonstrates **8+ capabilities** from the 5-Day AI Agents Intensive Course:
 
 | Day | Capability                      | Implementation                                           |
 |-----|---------------------------------|----------------------------------------------------------|
@@ -38,6 +38,8 @@ This capstone project demonstrates **6+ capabilities** from the 5-Day AI Agents 
 | 1   | Agent orchestration             | Manager delegates to specialists                         |
 | 2   | Custom tools                    | Behavior classifier, activity database, pattern analyzer |
 | 4   | Session management              | Conversation context, state tracking                     |
+| 5   | **ParallelAgent**               | Concurrent expert consultation (ADHD + ASD + Dev)        |
+| 5   | **SequentialAgent**             | Research pipeline (Research → Analyze → Synthesize)      |
 
 ## 🏗️ System Architecture
 
@@ -138,6 +140,53 @@ comprehensive validation.
 - Maintains empathetic, supportive communication
 - Tools: All 5 specialists as AgentTools
 
+### ADK Orchestration Patterns
+
+This project implements advanced ADK orchestration patterns for multi-agent coordination:
+
+#### ParallelAgent: Concurrent Expert Consultation
+
+```python
+from capstone.agents import create_parallel_expert_panel, create_research_panel
+
+# Consult all three specialists simultaneously
+expert_panel = create_parallel_expert_panel(
+    adhd_expert=create_adhd_expert(),
+    asd_expert=create_asd_expert(),
+    developmental_expert=create_developmental_expert(),
+)
+
+# Or create a custom panel with any number of experts
+custom_panel = create_research_panel(expert1, expert2, expert3)
+```
+
+**Use Cases**:
+- Get multiple perspectives on a behavior simultaneously
+- Reduce latency when consulting multiple specialists
+- Compare recommendations from different domains
+
+#### SequentialAgent: Structured Research Pipeline
+
+```python
+from capstone.agents import create_research_pipeline, create_behavior_analysis_pipeline
+
+# Pre-built behavior analysis pipeline
+pipeline = create_behavior_analysis_pipeline()
+# Flow: ADHD Expert → ASD Expert → Developmental Expert
+
+# Or create custom sequential workflows
+custom_pipeline = create_research_pipeline(
+    researcher=adhd_expert,      # Stage 1: Research
+    analyzer=asd_expert,         # Stage 2: Analyze
+    synthesizer=dev_expert,      # Stage 3: Synthesize
+)
+```
+
+**Use Cases**:
+- Deep investigation workflows requiring multiple stages
+- Building on previous analysis (Research → Analyze → Synthesize)
+- Structured problem-solving with clear stages
+
 ---
 
 ## 📁 Project Structure
@@ -160,6 +209,8 @@ neurodiveragents/
 │       │   ├── coordinator.py           # Manager/coordinator agent
 │       │   ├── specialist_factory.py    # Factory for specialist agents
 │       │   ├── agent_configs.py         # Agent configurations and prompts
+│       │   ├── parallel_analyzer.py     # ParallelAgent for concurrent expert consultation
+│       │   ├── research_pipeline.py     # SequentialAgent for structured workflows
 │       │   ├── tool_wrappers.py         # ADK tool wrapper functions
 │       │   ├── tool_formatters.py       # Output formatting utilities
 │       │   ├── specialist_helpers.py    # Specialist consultation helpers
@@ -167,7 +218,7 @@ neurodiveragents/
 │       └── infrastructure/
 │           └── agent_factory.py         # AgentFactory with caching
 ├── tests/
-│   ├── unit/                    # Unit tests (180 tests, 88% coverage)
+│   ├── unit/                    # Unit tests (207 tests, 89% coverage)
 │   └── conftest.py              # Test fixtures
 ├── docs/
 │   ├── api_reference.md         # Complete API documentation
@@ -388,9 +439,12 @@ about your child's development or behavior.
 3. ✅ Five specialist agents (ADHD, ASD, Developmental, Memory, Activity Planner)
 4. ✅ Manager coordinator agent with orchestration logic
 5. ✅ Multi-agent hierarchical system with AgentTool pattern
-6. ✅ Google Search integration for evidence-based strategies
+6. ✅ Google Search integration for evidence-based strategies (ADHD, ASD, Dev experts)
 7. ✅ Cross-session learning with pattern analysis
 8. ✅ Comprehensive demo scenarios
+9. ✅ **ParallelAgent** for concurrent expert consultation
+10. ✅ **SequentialAgent** for structured research pipelines
+11. ✅ **207 unit tests with 89% coverage**
 
 ## 📓 Kaggle Notebook
 
@@ -424,11 +478,12 @@ See [`notebooks/README.md`](notebooks/README.md) for detailed instructions.
 ## 🔮 Future Enhancements
 
 1. ✅ ~~Create Kaggle notebook with inline demonstrations~~ **DONE**
-2. 🚧 Add comprehensive testing suite
+2. ✅ ~~Add comprehensive testing suite~~ **DONE** (207 tests, 89% coverage)
 3. ✅ ~~Document ADK capabilities showcase~~ **DONE**
 4. ✅ ~~Add real-world scenario examples~~ **DONE**
-5. 🚧 Performance evaluation and metrics
-6. 🚧 Video demonstration (optional)
+5. ✅ ~~ParallelAgent & SequentialAgent patterns~~ **DONE**
+6. 🚧 Performance evaluation and metrics
+7. 🚧 Video demonstration (optional)
 
 ---
 
