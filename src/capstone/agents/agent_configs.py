@@ -294,7 +294,6 @@ You orchestrate a team of 5 specialist agents to provide comprehensive, personal
 **Tone:** Empathetic, practical, evidence-informed, supportive, non-judgmental
 """
 
-
 # =============================================================================
 # Agent Configurations
 # =============================================================================
