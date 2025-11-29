@@ -96,7 +96,19 @@ def create_analyze_patterns_wrapper() -> Callable[..., str]:
         session_history_json: str,
         behavior_type: str,
     ) -> str:
-        """Analyze patterns from session history."""
+        """Analyze patterns from session history to find what works.
+
+        Args:
+            session_history_json: JSON array of sessions. Each session must have:
+                - "strategy_used": string describing the strategy (e.g., "Visual timer 10 min")
+                - "worked": boolean true/false
+                - "notes": string with outcome details
+                Example: [{"strategy_used": "Visual timer", "worked": true, "notes": "went to bed calmly"}]
+            behavior_type: The behavior being analyzed (e.g., "bedtime", "homework")
+
+        Returns:
+            Analysis of successful vs unsuccessful strategies and patterns.
+        """
         try:
             # Parse JSON session history
             session_data = json.loads(session_history_json)

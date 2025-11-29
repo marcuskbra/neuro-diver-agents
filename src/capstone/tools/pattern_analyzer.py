@@ -25,19 +25,27 @@ def analyze_patterns(
                 error_message="Need at least 1 session for pattern analysis",
             )
 
-        # Filter relevant sessions
+        # Filter relevant sessions - look for behavior type keywords
+        behavior_keywords = [behavior_type.lower()]
+        # Add common variations for known behavior types
+        if behavior_type.lower() == "bedtime":
+            behavior_keywords.extend(["bed", "sleep", "night"])
+        elif behavior_type.lower() == "homework":
+            behavior_keywords.extend(["work", "study", "assignment"])
+        elif behavior_type.lower() == "morning":
+            behavior_keywords.extend(["wake", "routine", "breakfast"])
+
         relevant_sessions = [
             s
             for s in session_history
-            if behavior_type.lower() in s.strategy_used.lower()
-            or behavior_type.lower() in s.notes.lower()
+            if any(
+                kw in s.strategy_used.lower() or kw in s.notes.lower() for kw in behavior_keywords
+            )
         ]
 
+        # If no sessions match keywords, analyze all sessions
         if len(relevant_sessions) == 0:
-            return ToolError(
-                error_code="NO_MATCHING_SESSIONS",
-                error_message=f"No sessions found for behavior type: {behavior_type}",
-            )
+            relevant_sessions = session_history
 
         # Analyze successful strategies
         successful: list[str] = []

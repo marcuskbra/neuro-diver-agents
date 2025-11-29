@@ -87,10 +87,8 @@ class TestPatternAnalyzer:
         assert result.success is False
         assert result.error_code == "INSUFFICIENT_DATA"
 
-    def test_analyze_patterns_with_no_matching_sessions_returns_error(
-        self, session_outcome_factory
-    ):
-        """Test pattern analyzer returns error when no sessions match behavior type."""
+    def test_analyze_patterns_with_no_matching_sessions_analyzes_all(self, session_outcome_factory):
+        """Test pattern analyzer analyzes all sessions when no sessions match behavior type."""
         sessions = [
             session_outcome_factory(
                 strategy_used="homework timer strategy",
@@ -101,9 +99,10 @@ class TestPatternAnalyzer:
 
         result = analyze_patterns(sessions, "bedtime")
 
-        assert isinstance(result, ToolError)
-        assert result.error_code == "NO_MATCHING_SESSIONS"
-        assert "bedtime" in result.error_message
+        # Should fall back to analyzing all sessions instead of returning error
+        assert isinstance(result, ToolSuccess)
+        assert result.get_int("sessions") == 1
+        assert result.get_str("behavior_type") == "bedtime"
 
     def test_analyze_patterns_identifies_screen_time_trigger(self, session_outcome_factory):
         """Test pattern analyzer identifies screen time as a trigger."""
