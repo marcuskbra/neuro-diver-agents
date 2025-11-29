@@ -1,6 +1,7 @@
 """Unit tests for memory models."""
 
 from datetime import datetime
+from typing import cast
 
 import pytest
 from pydantic import ValidationError
@@ -45,7 +46,8 @@ class TestSessionOutcome:
                 notes="Valid notes here.",
             )
 
-        errors = exc_info.value.errors()
+        validation_error = cast(ValidationError, exc_info.value)
+        errors = validation_error.errors()
         assert any(e["loc"] == ("strategy_used",) for e in errors)
 
     def test_notes_min_length_validation(self):
@@ -57,7 +59,8 @@ class TestSessionOutcome:
                 notes="abc",  # Only 3 characters
             )
 
-        errors = exc_info.value.errors()
+        validation_error = cast(ValidationError, exc_info.value)
+        errors = validation_error.errors()
         assert any(e["loc"] == ("notes",) for e in errors)
 
     def test_notes_max_length_validation(self):
@@ -69,7 +72,8 @@ class TestSessionOutcome:
                 notes="x" * 501,  # 501 characters
             )
 
-        errors = exc_info.value.errors()
+        validation_error = cast(ValidationError, exc_info.value)
+        errors = validation_error.errors()
         assert any(e["loc"] == ("notes",) for e in errors)
 
     def test_strict_false_allows_string_coercion(self):
@@ -131,7 +135,8 @@ class TestBehaviorPattern:
                 sessions_analyzed=1,
             )
 
-        errors = exc_info.value.errors()
+        validation_error = cast(ValidationError, exc_info.value)
+        errors = validation_error.errors()
         assert any(e["loc"] == ("behavior_type",) for e in errors)
 
     def test_frequency_count_non_negative_validation(self):
@@ -143,7 +148,8 @@ class TestBehaviorPattern:
                 sessions_analyzed=5,
             )
 
-        errors = exc_info.value.errors()
+        validation_error = cast(ValidationError, exc_info.value)
+        errors = validation_error.errors()
         assert any(e["loc"] == ("frequency_count",) for e in errors)
 
     def test_sessions_analyzed_minimum_validation(self):
@@ -155,7 +161,8 @@ class TestBehaviorPattern:
                 sessions_analyzed=0,
             )
 
-        errors = exc_info.value.errors()
+        validation_error = cast(ValidationError, exc_info.value)
+        errors = validation_error.errors()
         assert any(e["loc"] == ("sessions_analyzed",) for e in errors)
 
     def test_frequency_cannot_exceed_sessions_analyzed(self):
@@ -167,7 +174,8 @@ class TestBehaviorPattern:
                 sessions_analyzed=5,
             )
 
-        errors = exc_info.value.errors()
+        validation_error = cast(ValidationError, exc_info.value)
+        errors = validation_error.errors()
         # The model_validator should raise an error
         assert any("Frequency cannot exceed sessions analyzed" in str(e) for e in errors)
 
@@ -214,5 +222,6 @@ class TestBehaviorPattern:
                 }
             )
 
-        errors = exc_info.value.errors()
+        validation_error = cast(ValidationError, exc_info.value)
+        errors = validation_error.errors()
         assert any(e["type"] == "extra_forbidden" for e in errors)
