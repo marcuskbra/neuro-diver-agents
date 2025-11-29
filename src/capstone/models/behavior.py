@@ -36,7 +36,11 @@ class ActivityType(str, Enum):
 
 
 class BehaviorInput(BaseModel):
-    """Input for behavior analysis."""
+    """Input for behavior analysis.
+
+    Note: strict=False allows LLM tool calls to pass string values
+    for enums (e.g., "evening" -> TimeOfDay.EVENING).
+    """
 
     description: str = Field(..., min_length=10, max_length=1000)
     time_of_day: TimeOfDay
@@ -46,7 +50,7 @@ class BehaviorInput(BaseModel):
     model_config = ConfigDict(
         validate_assignment=True,
         use_enum_values=False,
-        strict=True,
+        strict=False,  # Allow string coercion for LLM tool inputs
         extra="forbid",
     )
 

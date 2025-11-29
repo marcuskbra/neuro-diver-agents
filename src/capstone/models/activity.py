@@ -36,7 +36,11 @@ class ActivityPlan(BaseModel):
 
 
 class ActivityRequest(BaseModel):
-    """Request for activity planning."""
+    """Request for activity planning.
+
+    Note: strict=False allows LLM tool calls to pass string values
+    for enums (e.g., "engagement" -> ActivityGoal.ENGAGEMENT).
+    """
 
     goal: ActivityGoal
     duration_minutes: int = Field(..., ge=5, le=120)
@@ -46,6 +50,6 @@ class ActivityRequest(BaseModel):
     model_config = ConfigDict(
         validate_assignment=True,
         use_enum_values=False,
-        strict=True,
+        strict=False,  # Allow string coercion for LLM tool inputs
         extra="forbid",
     )

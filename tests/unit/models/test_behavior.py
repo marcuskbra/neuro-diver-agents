@@ -91,7 +91,7 @@ class TestBehaviorInput:
                 "context": "Valid context",
                 "extra_field": "should not be allowed",
             }
-            BehaviorInput(**kwargs)
+            BehaviorInput.model_validate(kwargs)
 
         validation_error = cast(ValidationError, exc_info.value)
         errors = validation_error.errors()
@@ -107,7 +107,7 @@ class TestBehaviorInput:
                 "activity_type": ActivityType.HOMEWORK,
                 "context": "Valid context",
             }
-            BehaviorInput(**kwargs)
+            BehaviorInput.model_validate(kwargs)
 
         validation_error = cast(ValidationError, exc_info.value)
         errors = validation_error.errors()

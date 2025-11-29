@@ -6,7 +6,11 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class SessionOutcome(BaseModel):
-    """Outcome of a strategy application."""
+    """Outcome of a strategy application.
+
+    Note: strict=False allows LLM tool calls to pass string values
+    (e.g., "true" -> True for booleans, ISO strings -> datetime).
+    """
 
     strategy_used: str = Field(..., min_length=5)
     worked: bool
@@ -15,7 +19,7 @@ class SessionOutcome(BaseModel):
 
     model_config = ConfigDict(
         validate_assignment=True,
-        strict=True,
+        strict=False,  # Allow string coercion for LLM tool inputs
         extra="forbid",
     )
 
