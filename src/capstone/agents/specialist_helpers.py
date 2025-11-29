@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import Any
 
+from google import genai
 from google.adk.agents import LlmAgent
 
 
@@ -16,8 +16,8 @@ def consult_specialist(
     """
     Generic specialist consultation with error handling.
 
-    This function replaces 5 nearly identical consultation functions,
-    reducing code duplication while maintaining consistent error handling.
+    This function uses the genai.Client directly to consult specialist agents,
+    passing the agent's instruction as the system prompt.
 
     Args:
         agent_getter: Callable that returns the specialist agent instance.
@@ -28,14 +28,21 @@ def consult_specialist(
         The specialist's response text, or an error message.
     """
     try:
-        agent = agent_getter()
-        # Use getattr to safely access generate_content method
-        generate_method = getattr(agent, "generate_content", None)
-        if generate_method is None:
-            return f"Error: {specialist_name} agent does not have generate_content method"
-        response: Any = generate_method(question)
-        if hasattr(response, "text"):
-            return str(response.text)
-        return str(response)
+        agent: LlmAgent = agent_getter()
+
+        # Use genai.Client directly with agent's instruction as system prompt
+        client = genai.Client()
+        response = client.models.generate_content(
+            model=str(agent.model),
+            contents=question,
+            config=genai.types.GenerateContentConfig(
+                system_instruction=agent.instruction,
+            ),
+        )
+
+        if response.text:
+            return response.text
+
+        return f"No response from {specialist_name}"
     except Exception as e:
         return f"Error consulting {specialist_name}: {str(e)}"
