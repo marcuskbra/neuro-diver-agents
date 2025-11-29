@@ -473,3 +473,40 @@ class TestPatternAnalyzer:
         common_triggers = result.get_list("common_triggers")
         assert isinstance(common_triggers, list)
         # May be empty if no recognized triggers
+
+    def test_analyze_patterns_with_morning_behavior_type(self, session_outcome_factory):
+        """Test pattern analyzer recognizes morning keywords."""
+        sessions = [
+            session_outcome_factory(
+                strategy_used="wake up routine with alarm",
+                worked=True,
+                notes="Woke up smoothly with gradual alarm",
+            ),
+            session_outcome_factory(
+                strategy_used="breakfast visual schedule",
+                worked=True,
+                notes="Followed breakfast routine perfectly",
+            ),
+        ]
+
+        result = analyze_patterns(sessions, "morning")
+
+        assert isinstance(result, ToolSuccess)
+        assert result.get_int("sessions") == 2
+        assert result.get_str("behavior_type") == "morning"
+        assert len(result.get_list("successful_strategies")) == 2
+
+    def test_analyze_patterns_morning_keywords_include_routine(self, session_outcome_factory):
+        """Test pattern analyzer includes 'routine' in morning keyword matching."""
+        sessions = [
+            session_outcome_factory(
+                strategy_used="daily routine chart",
+                worked=True,
+                notes="Morning went well with chart",
+            ),
+        ]
+
+        result = analyze_patterns(sessions, "morning")
+
+        assert isinstance(result, ToolSuccess)
+        assert result.get_int("sessions") == 1

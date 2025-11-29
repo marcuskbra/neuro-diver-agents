@@ -212,7 +212,7 @@ neurodiveragents/
 │       └── infrastructure/
 │           └── agent_factory.py         # AgentFactory with caching
 ├── tests/
-│   ├── unit/                    # Unit tests (180 tests, 89% coverage)
+│   ├── unit/                    # Unit tests (237 tests, 94% coverage)
 │   └── conftest.py              # Test fixtures
 ├── docs/
 │   ├── api_reference.md         # Complete API documentation
@@ -438,7 +438,7 @@ about your child's development or behavior.
 8. ✅ Comprehensive demo scenarios
 9. ✅ **ParallelAgent** for concurrent expert consultation
 10. ✅ **SequentialAgent** for structured research pipelines
-11. ✅ **180 unit tests with 89% coverage**
+11. ✅ **237 unit tests with 94% coverage**
 
 ## 📓 Kaggle Notebook
 
@@ -472,7 +472,7 @@ See [`notebooks/README.md`](notebooks/README.md) for detailed instructions.
 ## 🔮 Future Enhancements
 
 1. ✅ ~~Create Kaggle notebook with inline demonstrations~~ **DONE**
-2. ✅ ~~Add comprehensive testing suite~~ **DONE** (180 tests, 89% coverage)
+2. ✅ ~~Add comprehensive testing suite~~ **DONE** (237 tests, 94% coverage)
 3. ✅ ~~Document ADK capabilities showcase~~ **DONE**
 4. ✅ ~~Add real-world scenario examples~~ **DONE**
 5. ✅ ~~ParallelAgent & SequentialAgent patterns~~ **DONE**
