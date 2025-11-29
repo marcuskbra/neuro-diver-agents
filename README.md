@@ -147,17 +147,15 @@ This project implements advanced ADK orchestration patterns for multi-agent coor
 #### ParallelAgent: Concurrent Expert Consultation
 
 ```python
-from capstone.agents import create_parallel_expert_panel, create_research_panel
+from google.adk.agents import ParallelAgent
+from capstone.agents import create_adhd_expert, create_asd_expert, create_developmental_expert
 
 # Consult all three specialists simultaneously
-expert_panel = create_parallel_expert_panel(
-    adhd_expert=create_adhd_expert(),
-    asd_expert=create_asd_expert(),
-    developmental_expert=create_developmental_expert(),
+expert_panel = ParallelAgent(
+    name="parallel_expert_panel",
+    description="Consults ADHD, ASD, and developmental experts in parallel",
+    sub_agents=[create_adhd_expert(), create_asd_expert(), create_developmental_expert()],
 )
-
-# Or create a custom panel with any number of experts
-custom_panel = create_research_panel(expert1, expert2, expert3)
 ```
 
 **Use Cases**:
@@ -168,17 +166,15 @@ custom_panel = create_research_panel(expert1, expert2, expert3)
 #### SequentialAgent: Structured Research Pipeline
 
 ```python
-from capstone.agents import create_research_pipeline, create_behavior_analysis_pipeline
+from google.adk.agents import SequentialAgent
+from capstone.agents import create_adhd_expert, create_asd_expert, create_developmental_expert
 
-# Pre-built behavior analysis pipeline
-pipeline = create_behavior_analysis_pipeline()
+# Create sequential research pipeline
 # Flow: ADHD Expert → ASD Expert → Developmental Expert
-
-# Or create custom sequential workflows
-custom_pipeline = create_research_pipeline(
-    researcher=adhd_expert,      # Stage 1: Research
-    analyzer=asd_expert,         # Stage 2: Analyze
-    synthesizer=dev_expert,      # Stage 3: Synthesize
+pipeline = SequentialAgent(
+    name="research_pipeline",
+    description="Sequential pipeline: Research → Analyze → Synthesize",
+    sub_agents=[create_adhd_expert(), create_asd_expert(), create_developmental_expert()],
 )
 ```
 
@@ -209,8 +205,6 @@ neurodiveragents/
 │       │   ├── coordinator.py           # Manager/coordinator agent
 │       │   ├── specialist_factory.py    # Factory for specialist agents
 │       │   ├── agent_configs.py         # Agent configurations and prompts
-│       │   ├── parallel_analyzer.py     # ParallelAgent for concurrent expert consultation
-│       │   ├── research_pipeline.py     # SequentialAgent for structured workflows
 │       │   ├── tool_wrappers.py         # ADK tool wrapper functions
 │       │   ├── tool_formatters.py       # Output formatting utilities
 │       │   ├── specialist_helpers.py    # Specialist consultation helpers
@@ -218,7 +212,7 @@ neurodiveragents/
 │       └── infrastructure/
 │           └── agent_factory.py         # AgentFactory with caching
 ├── tests/
-│   ├── unit/                    # Unit tests (207 tests, 89% coverage)
+│   ├── unit/                    # Unit tests (180 tests, 89% coverage)
 │   └── conftest.py              # Test fixtures
 ├── docs/
 │   ├── api_reference.md         # Complete API documentation
@@ -444,7 +438,7 @@ about your child's development or behavior.
 8. ✅ Comprehensive demo scenarios
 9. ✅ **ParallelAgent** for concurrent expert consultation
 10. ✅ **SequentialAgent** for structured research pipelines
-11. ✅ **207 unit tests with 89% coverage**
+11. ✅ **180 unit tests with 89% coverage**
 
 ## 📓 Kaggle Notebook
 
@@ -478,7 +472,7 @@ See [`notebooks/README.md`](notebooks/README.md) for detailed instructions.
 ## 🔮 Future Enhancements
 
 1. ✅ ~~Create Kaggle notebook with inline demonstrations~~ **DONE**
-2. ✅ ~~Add comprehensive testing suite~~ **DONE** (207 tests, 89% coverage)
+2. ✅ ~~Add comprehensive testing suite~~ **DONE** (180 tests, 89% coverage)
 3. ✅ ~~Document ADK capabilities showcase~~ **DONE**
 4. ✅ ~~Add real-world scenario examples~~ **DONE**
 5. ✅ ~~ParallelAgent & SequentialAgent patterns~~ **DONE**

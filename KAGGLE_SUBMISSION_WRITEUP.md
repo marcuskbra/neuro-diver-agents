@@ -194,7 +194,7 @@ treatment plans, and serious behavioral concerns.
 
 ## Links
 
-- **Kaggle Notebook**: [Link to notebook]
+- **Kaggle Notebook**: https://www.kaggle.com/code/marcuskbra/kaggle-agents-intensive-capstone-project
 - **GitHub Repository**: [https://github.com/marcuskbra/neuro-diver-agents](https://github.com/marcuskbra/neuro-diver-agents)
 - **Demo Video**: [Optional - for bonus points]
 

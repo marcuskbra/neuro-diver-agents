@@ -105,12 +105,12 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 # Import your agents
+from google.adk.agents import ParallelAgent, SequentialAgent
+
 from capstone.agents import (
     create_adhd_expert,
     create_asd_expert,
     create_developmental_expert,
-    create_parallel_expert_panel,
-    create_research_pipeline,
 )
 from capstone.infrastructure.agent_factory import AgentFactory
 
@@ -166,16 +166,27 @@ async def query_agents(request: QueryRequest):
 
         if request.use_parallel:
             # Use ParallelAgent for concurrent consultation
-            panel = create_parallel_expert_panel(
-                factory.get_adhd_expert(),
-                factory.get_asd_expert(),
-                factory.get_developmental_expert(),
+            panel = ParallelAgent(
+                name="parallel_expert_panel",
+                description="Consults experts in parallel",
+                sub_agents=[
+                    factory.get_adhd_expert(),
+                    factory.get_asd_expert(),
+                    factory.get_developmental_expert(),
+                ],
             )
             agents_used = ["adhd_expert", "asd_expert", "developmental_expert"]
         else:
             # Use SequentialAgent for structured analysis
-            from capstone.agents import create_behavior_analysis_pipeline
-            panel = create_behavior_analysis_pipeline()
+            panel = SequentialAgent(
+                name="behavior_analysis_pipeline",
+                description="Sequential behavior analysis pipeline",
+                sub_agents=[
+                    factory.get_adhd_expert(),
+                    factory.get_asd_expert(),
+                    factory.get_developmental_expert(),
+                ],
+            )
             agents_used = ["behavior_analysis_pipeline"]
 
         # Execute query (placeholder - integrate with actual ADK runner)
