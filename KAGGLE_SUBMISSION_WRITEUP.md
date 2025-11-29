@@ -28,12 +28,31 @@ The **Neurodivergent Parenting Support Agents** is a multi-agent AI system that 
 available 24/7:
 
 ```
-                    Parenting Coordinator (Manager)
-                              |
-        +----------+----------+----------+----------+
-        |          |          |          |          |
-     ADHD       ASD      Developmental  Memory   Activity
-     Expert    Expert      Expert       Agent    Planner
+                    ┌─────────────────────────────────────────────────────────┐
+                    │            🎯 PARENTING COORDINATOR                     │
+                    │                   (Manager Agent)                       │
+                    │  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ │
+                    │  • Orchestrates all specialist agents                   │
+                    │  • Routes questions to appropriate experts              │
+                    │  • Synthesizes multi-perspective responses              │
+                    │  • Tools: All 5 specialists as AgentTools               │
+                    └───────────────────────────┬─────────────────────────────┘
+                                                │
+            ┌───────────────┬───────────────────┼───────────────────┬──────────────────┐
+            │               │                   │                   │                  │
+            ▼               ▼                   ▼                   ▼                  ▼
+   ┌─────────────┐  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐   ┌─────────────────┐
+   │   🧠 ADHD   │  │  🌈 ASD     │   │  📊 DEV     │   │  💾 MEMORY  │   │  📅 ACTIVITY    │
+   │   Expert    │  │  Expert     │   │  Expert     │   │  Agent      │   │  Planner        │
+   │─────────────│  │─────────────│   │─────────────│   │─────────────│   │─────────────────│
+   │ Executive   │  │ Sensory     │   │ Age-typical │   │ Pattern     │   │ Structured      │
+   │ function    │  │ processing  │   │ milestones  │   │ learning    │   │ activity plans  │
+   │─────────────│  │─────────────│   │─────────────│   │─────────────│   │─────────────────│
+   │ 🔧 Tools:   │  │ 🔧 Tools:   │   │ 🔧 Tools:   │   │ 🔧 Tools:   │   │ 🔧 Tools:       │
+   │ • Search    │  │ • Search    │   │ • Search    │   │ • Pattern   │   │ • Activity      │
+   │ • Behavior  │  │ • Behavior  │   │             │   │   Analyzer  │   │   Planner       │
+   │   Classifier│  │   Classifier│   │             │   │             │   │                 │
+   └─────────────┘  └─────────────┘   └─────────────┘   └─────────────┘   └─────────────────┘
 ```
 
 Each specialist focuses on their domain:
