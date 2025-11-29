@@ -57,9 +57,4 @@ Thumbs.db
 *.log
 .claude/
 .serena/
-
-# Temporary test files
-test_minimal.py
-test_simple.py
-debug_agents.py
-interactive_test.py
+.qodo/
