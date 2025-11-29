@@ -6,16 +6,18 @@ authors = [{name = "Marcus Carvalho"}]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "pydantic>=2.10.0",
+    "pydantic>=2.12.5",
     "google-adk>=0.1.0",
+    "notebook>=7.5.0",
+    "hatchling>=1.28.0",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
-    "ruff>=0.8.4",
-    "ty>=0.0.1a27",
+    "ruff>=0.14.6",
+    "ty>=0.0.1a28",
 ]
 
 [build-system]
